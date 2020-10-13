@@ -60,6 +60,26 @@ public class LinkedList<K> {
 		size--;
 		return temp;
 	}
+	
+	public INode<K> popLast(){
+		INode<K> secondLastNode=this.head;
+		if(secondLastNode==null) {
+			return null;
+		}else if(secondLastNode==this.tail) {
+			this.head=null;
+			this.tail=null;
+			return secondLastNode;
+		}else {
+			while(secondLastNode.getNext()!=this.tail) {
+				secondLastNode=secondLastNode.getNext();
+			}
+		}
+		INode<K> temp=this.tail;
+		this.tail=secondLastNode;
+		this.tail.setNext(null);
+		size--;
+		return temp;
+	}
 
 	public void printList() {
 		INode<K> node = this.head;
@@ -80,10 +100,10 @@ public class LinkedList<K> {
 		list.append(node1);
 		list.append(node3);
 		list.insertAfter(node1, node2);
-		logger.debug("List before popping:\n");
+		logger.debug("List before popping last:\n");
 		list.printList();
-		logger.debug("\nPopped element: " + list.pop().getKey());
-		logger.debug("\nList after popping:\n");
+		logger.debug("\nPopped element: " + list.popLast().getKey());
+		logger.debug("\nList after popping last:\n");
 		list.printList();
 	}
 }
