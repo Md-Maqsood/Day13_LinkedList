@@ -16,7 +16,7 @@ public class LinkedList<K> {
 		this.size = 0;
 	}
 
-	public int getSize() {
+	public int size() {
 		return size;
 	}
 
@@ -92,7 +92,7 @@ public class LinkedList<K> {
 		logger.debug(" Size: " + size + "\n");
 	}
 
-	public boolean search(int searchValue) {
+	public boolean search(K searchValue) {
 		INode<K> node = this.head;
 		while (node != null) {
 			if (node.getKey().equals(searchValue)) {
@@ -103,7 +103,7 @@ public class LinkedList<K> {
 		return false;
 	}
 
-	public void insertAfter(int value, INode<K> newNode) {
+	public void insertAfter(K value, INode<K> newNode) {
 		INode<K> node = this.head;
 		while (node != null) {
 			if (node.getKey().equals(value)) {
@@ -121,6 +121,27 @@ public class LinkedList<K> {
 			this.size++;
 		}
 	}
+	
+	public void remove(K value) {
+		INode<K> node= this.head;
+		if(node==this.tail && node!=null) {
+			if(node.getKey().equals(value)) {
+				this.head=null;
+				this.tail=null;
+			}
+		}else if(node!=null) {
+			while(node!=this.tail && !(node.getNext().getKey().equals(value))){
+				node=node.getNext();
+			}
+			INode<K> nodeRemoved=node.getNext();
+			node.setNext(nodeRemoved.getNext());
+			nodeRemoved.setNext(null);
+			if(nodeRemoved==this.tail) {
+				this.tail=node;
+			}
+			size--;
+		}		
+	}
 
 	public static void main(String[] args) {
 		LinkedList<Integer> list = new LinkedList<Integer>();
@@ -132,6 +153,7 @@ public class LinkedList<K> {
 		list.insertAfter(node1, node2);
 		list.printList();
 	}
+
 }
 
 interface INode<K> {
