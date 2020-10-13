@@ -3,14 +3,14 @@ package com.BridgeLabs.LinkedListProgram;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class LinkedList<K> {
-	private static final Logger logger = LogManager.getLogger(LinkedList.class);
+public class SortededLinkedList<K extends Comparable<K>> {
+	private static final Logger logger = LogManager.getLogger(SortededLinkedList.class);
 
 	public INode<K> head;
 	public INode<K> tail;
 	private int size;
 
-	public LinkedList() {
+	public SortededLinkedList() {
 		this.head = null;
 		this.tail = null;
 		this.size = 0;
@@ -26,15 +26,30 @@ public class LinkedList<K> {
 		}
 		if (this.tail == null) {
 			this.tail = newNode;
-		} else {
+			size++;
+		}else if(this.head==this.tail) {
+			if(newNode.getKey().compareTo(this.head.getKey())>0) {
+				append(newNode);
+			}else {
+				INode<K> temp = this.head;
+				this.head = newNode;
+				this.head.setNext(temp);
+				size++;
+			}
+		}else if(newNode.getKey().compareTo(this.head.getKey())<0) {
 			INode<K> temp = this.head;
 			this.head = newNode;
 			this.head.setNext(temp);
+		}else {
+			INode<K> node = this.head;
+			while(node!=this.tail && newNode.getKey().compareTo(node.getNext().getKey())>0) {
+				node=node.getNext();
+			}
+			insertAfter(node, newNode);
 		}
-		this.size++;
 	}
 
-	public void append(INode<K> newNode) {
+	private void append(INode<K> newNode) {
 		if (this.head == null) {
 			this.head = newNode;
 		}
@@ -47,11 +62,15 @@ public class LinkedList<K> {
 		this.size++;
 	}
 
-	public void insertAfter(INode<K> node, INode<K> newNode) {
-		INode<K> temp = node.getNext();
-		node.setNext(newNode);
-		node.getNext().setNext(temp);
-		this.size++;
+	private void insertAfter(INode<K> node, INode<K> newNode) {
+		if(node==this.tail) {
+			append(newNode);
+		} else {
+			INode<K> temp = node.getNext();
+			node.setNext(newNode);
+			node.getNext().setNext(temp);
+			this.size++;
+		}
 	}
 
 	public INode<K> pop() {
@@ -103,7 +122,7 @@ public class LinkedList<K> {
 		return false;
 	}
 
-	public void insertAfter(K value, INode<K> newNode) {
+	private void insertAfter(K value, INode<K> newNode) {
 		INode<K> node = this.head;
 		while (node != null) {
 			if (node.getKey().equals(value)) {
@@ -112,13 +131,7 @@ public class LinkedList<K> {
 			node = node.getNext();
 		}
 		if (node != null) {
-			INode<K> temp = node.getNext();
-			node.setNext(newNode);
-			node.getNext().setNext(temp);
-			if (node == this.tail) {
-				this.tail = newNode;
-			}
-			this.size++;
+			insertAfter(node, newNode);
 		}
 	}
 
@@ -147,19 +160,21 @@ public class LinkedList<K> {
 	}
 
 	public static void main(String[] args) {
-		LinkedList<Integer> list = new LinkedList<Integer>();
+		SortededLinkedList<Integer> list = new SortededLinkedList<Integer>();
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
 		MyNode<Integer> node2 = new MyNode<Integer>(30);
 		MyNode<Integer> node3 = new MyNode<Integer>(70);
-		list.append(node1);
-		list.append(node3);
-		list.insertAfter(node1, node2);
+		MyNode<Integer> node4 = new MyNode<Integer>(40);
+		list.add(node1);
+		list.add(node2);
+		list.add(node3);
+		list.add(node4);
 		list.printList();
 	}
 
 }
 
-interface INode<K> {
+interface INode<K extends Comparable<K>> {
 	K getKey();
 
 	void setKey(K key);
@@ -169,7 +184,7 @@ interface INode<K> {
 	void setNext(INode<K> next);
 }
 
-class MyNode<K> implements INode<K> {
+class MyNode<K extends Comparable<K>> implements INode<K> {
 	private K key;
 	private MyNode<K> next;
 

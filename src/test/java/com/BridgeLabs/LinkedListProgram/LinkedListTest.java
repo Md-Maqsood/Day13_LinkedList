@@ -10,13 +10,13 @@ public class LinkedListTest {
 
 	@Test
 	public void givenSearchValue_WhenInList_ShouldReturnTrue() {
-		LinkedList<Integer> list = new LinkedList<Integer>();
+		SortededLinkedList<Integer> list = new SortededLinkedList<Integer>();
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
 		MyNode<Integer> node2 = new MyNode<Integer>(30);
 		MyNode<Integer> node3 = new MyNode<Integer>(70);
-		list.append(node1);
-		list.append(node2);
-		list.append(node3);
+		list.add(node1);
+		list.add(node2);
+		list.add(node3);
 		list.printList();
 		boolean result = list.search(30);
 		Assert.assertTrue(result);
@@ -24,61 +24,30 @@ public class LinkedListTest {
 
 	@Test
 	public void givenSearchValue_WhenNotInList_ShouldReturnFalse() {
-		LinkedList<Integer> list = new LinkedList<Integer>();
+		SortededLinkedList<Integer> list = new SortededLinkedList<Integer>();
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
 		MyNode<Integer> node2 = new MyNode<Integer>(30);
 		MyNode<Integer> node3 = new MyNode<Integer>(70);
-		list.append(node1);
-		list.append(node2);
-		list.append(node3);
+		list.add(node1);
+		list.add(node2);
+		list.add(node3);
 		list.printList();
 		boolean result = list.search(40);
 		Assert.assertFalse(result);
 	}
 
-	@Test
-	public void onInsertingAfterGivenValue_WhenSearched_ShouldReturnTrue() {
-		LinkedList<Integer> list = new LinkedList<Integer>();
-		MyNode<Integer> node1 = new MyNode<Integer>(56);
-		MyNode<Integer> node2 = new MyNode<Integer>(30);
-		MyNode<Integer> node3 = new MyNode<Integer>(70);
-		list.append(node1);
-		list.append(node2);
-		list.append(node3);
-		MyNode<Integer> node4 = new MyNode<Integer>(40);
-		list.insertAfter(30, node4);
-		list.printList();
-		boolean result = list.search(40) && node4.getNext() == node3;
-		Assert.assertTrue(result);
-	}
-
-	@Test
-	public void onInsertingAfterGivenValueNotInList_WhenSearched_ShouldReturnFalse() {
-		LinkedList<Integer> list = new LinkedList<Integer>();
-		MyNode<Integer> node1 = new MyNode<Integer>(56);
-		MyNode<Integer> node2 = new MyNode<Integer>(30);
-		MyNode<Integer> node3 = new MyNode<Integer>(70);
-		list.append(node1);
-		list.append(node2);
-		list.append(node3);
-		MyNode<Integer> node4 = new MyNode<Integer>(40);
-		list.insertAfter(50, node4);
-		list.printList();
-		boolean result = list.search(40) || node4.getNext() == node3;
-		Assert.assertFalse(result);
-	}
 
 	@Test
 	public void onDeletingGivenValue_WhenSearched_ShouldReturnFalse_AndListSizeReducedByOne() {
-		LinkedList<Integer> list = new LinkedList<Integer>();
+		SortededLinkedList<Integer> list = new SortededLinkedList<Integer>();
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
 		MyNode<Integer> node2 = new MyNode<Integer>(30);
 		MyNode<Integer> node3 = new MyNode<Integer>(70);
-		list.append(node1);
-		list.append(node2);
-		list.append(node3);
 		MyNode<Integer> node4 = new MyNode<Integer>(40);
-		list.insertAfter(30, node4);
+		list.add(node1);
+		list.add(node2);
+		list.add(node4);
+		list.add(node3);
 		logger.debug("Before deletion: ");
 		list.printList();
 		int sizeBeforeDeletion=list.size();
@@ -92,9 +61,9 @@ public class LinkedListTest {
 	
 	@Test
 	public void onDeletingFromListWithSingleElementGivenValue_WhenSearched_ShouldReturnFalse_AndListSizeReducedByOneWith() {
-		LinkedList<Integer> list = new LinkedList<Integer>();
+		SortededLinkedList<Integer> list = new SortededLinkedList<Integer>();
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
-		list.append(node1);
+		list.add(node1);
 		logger.debug("Before deletion: ");
 		list.printList();
 		int sizeBeforeDeletion=list.size();
@@ -108,15 +77,16 @@ public class LinkedListTest {
 	
 	@Test
 	public void onDeletingGivenValueNotInList_ListSizeShouldRemainSame() {
-		LinkedList<Integer> list = new LinkedList<Integer>();
+		SortededLinkedList<Integer> list = new SortededLinkedList<Integer>();
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
 		MyNode<Integer> node2 = new MyNode<Integer>(30);
 		MyNode<Integer> node3 = new MyNode<Integer>(70);
-		list.append(node1);
-		list.append(node2);
-		list.append(node3);
 		MyNode<Integer> node4 = new MyNode<Integer>(40);
-		list.insertAfter(30, node4);
+		list.add(node1);
+		list.add(node2);
+		list.add(node4);
+		list.add(node3);
+		
 		logger.debug("Before deletion: ");
 		list.printList();
 		int sizeBeforeDeletion=list.size();
@@ -127,5 +97,28 @@ public class LinkedListTest {
 		boolean result = sizeAfterDeletion==sizeBeforeDeletion;
 		Assert.assertTrue(result);
 	}
-
+	
+	@Test
+	public void onAddingUnorderedValues_WhenMatched_ShouldMatchSortedOrder() {
+		SortededLinkedList<Integer> list = new SortededLinkedList<Integer>();
+		MyNode<Integer> node1 = new MyNode<Integer>(56);
+		MyNode<Integer> node2 = new MyNode<Integer>(30);
+		MyNode<Integer> node3 = new MyNode<Integer>(70);
+		MyNode<Integer> node4 = new MyNode<Integer>(40);
+		list.add(node1);
+		list.add(node2);
+		list.add(node4);
+		list.add(node3);
+		list.printList();
+		MyNode<Integer> node=(MyNode<Integer>) list.head;
+		boolean result= node==node2;
+		node=node.getNext();
+		result=result && node==node4;
+		node=node.getNext();
+		result=result && node==node1;
+		node=node.getNext();
+		result=result && node==node3;
+		Assert.assertTrue(result);
+		
+	}
 }
