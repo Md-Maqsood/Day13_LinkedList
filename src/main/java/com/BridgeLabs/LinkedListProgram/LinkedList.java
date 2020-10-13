@@ -60,22 +60,22 @@ public class LinkedList<K> {
 		size--;
 		return temp;
 	}
-	
-	public INode<K> popLast(){
-		INode<K> secondLastNode=this.head;
-		if(secondLastNode==null) {
+
+	public INode<K> popLast() {
+		INode<K> secondLastNode = this.head;
+		if (secondLastNode == null) {
 			return null;
-		}else if(secondLastNode==this.tail) {
-			this.head=null;
-			this.tail=null;
+		} else if (secondLastNode == this.tail) {
+			this.head = null;
+			this.tail = null;
 			return secondLastNode;
-		}else {
-			while(secondLastNode.getNext()!=this.tail) {
-				secondLastNode=secondLastNode.getNext();
+		} else {
+			while (secondLastNode.getNext() != this.tail) {
+				secondLastNode = secondLastNode.getNext();
 			}
 		}
-		INode<K> temp=this.tail;
-		this.tail=secondLastNode;
+		INode<K> temp = this.tail;
+		this.tail = secondLastNode;
 		this.tail.setNext(null);
 		size--;
 		return temp;
@@ -89,18 +89,37 @@ public class LinkedList<K> {
 				logger.debug("->" + node.getKey());
 			}
 		}
-		logger.debug(" Size: " + size+"\n");
+		logger.debug(" Size: " + size + "\n");
 	}
 
 	public boolean search(int searchValue) {
-		INode<K> node=this.head;
-		while(node!=null) {
-			if(node.getKey().equals(searchValue)) {
+		INode<K> node = this.head;
+		while (node != null) {
+			if (node.getKey().equals(searchValue)) {
 				return true;
 			}
-			node=node.getNext();
+			node = node.getNext();
 		}
 		return false;
+	}
+
+	public void insertAfter(int value, INode<K> newNode) {
+		INode<K> node = this.head;
+		while (node != null) {
+			if (node.getKey().equals(value)) {
+				break;
+			}
+			node = node.getNext();
+		}
+		if (node != null) {
+			INode<K> temp = node.getNext();
+			node.setNext(newNode);
+			node.getNext().setNext(temp);
+			if (node == this.tail) {
+				this.tail = newNode;
+			}
+			this.size++;
+		}
 	}
 
 	public static void main(String[] args) {
@@ -113,7 +132,6 @@ public class LinkedList<K> {
 		list.insertAfter(node1, node2);
 		list.printList();
 	}
-
 }
 
 interface INode<K> {
