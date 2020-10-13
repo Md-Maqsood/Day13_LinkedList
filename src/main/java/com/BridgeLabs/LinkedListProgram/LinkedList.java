@@ -3,20 +3,57 @@ package com.BridgeLabs.LinkedListProgram;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class LinkedList {
+public class LinkedList<K> {
 	private static final Logger logger=LogManager.getLogger(LinkedList.class);
-	public static void main(String[] args) {
-		logger.debug("Creating a simple linked list: \n");
-		MyNode<Integer> node1=new MyNode<Integer>(56);
-		MyNode<Integer> node2=new MyNode<Integer>(30);
-		MyNode<Integer> node3=new MyNode<Integer>(70);
-		node1.setNext(node2);
-		node2.setNext(node3);
-		MyNode<Integer> node=node1;
-		logger.debug("List: "+node.getKey());
-		while((node=node.getNext())!=null) {
-			logger.debug("->"+node.getKey());
+	
+	public INode<K> head;
+	public INode<K> tail;
+	private int size;
+	
+	public LinkedList(){
+		this.head=null;
+		this.tail=null;
+		this.size=0;
+	}
+	
+	public int getSize() {
+		return size;
+	}
+	
+	public void add(INode<K> newNode) {
+		if(this.head==null) {
+			this.head=newNode;
 		}
+		if(this.tail==null) {
+			this.tail=newNode;
+		}else {
+			INode<K> temp=this.head;
+			this.head=newNode;
+			this.head.setNext(temp);
+		}
+		this.size++;
+	}
+	
+	public void printList() {
+		INode<K> node=this.head;
+		if(node!=null) {
+			logger.debug("List: "+node.getKey());
+			while((node=node.getNext())!=null) {
+				logger.debug("->"+node.getKey());
+			}
+		}
+		logger.debug(" Size: "+size);
+	}
+	
+	public static void main(String[] args) {
+		LinkedList<Integer> list=new LinkedList<Integer>();
+		MyNode<Integer> node3=new MyNode<Integer>(70);
+		list.add(node3);
+		MyNode<Integer> node2=new MyNode<Integer>(30);
+		list.add(node2);
+		MyNode<Integer> node1=new MyNode<Integer>(56);
+		list.add(node1);
+		list.printList();
 	}
 }
 
