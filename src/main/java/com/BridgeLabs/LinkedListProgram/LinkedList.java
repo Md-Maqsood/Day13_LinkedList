@@ -89,7 +89,18 @@ public class LinkedList<K> {
 				logger.debug("->" + node.getKey());
 			}
 		}
-		logger.debug(" Size: " + size);
+		logger.debug(" Size: " + size+"\n");
+	}
+
+	public boolean search(int searchValue) {
+		INode<K> node=this.head;
+		while(node!=null) {
+			if(node.getKey().equals(searchValue)) {
+				return true;
+			}
+			node=node.getNext();
+		}
+		return false;
 	}
 
 	public static void main(String[] args) {
@@ -100,12 +111,9 @@ public class LinkedList<K> {
 		list.append(node1);
 		list.append(node3);
 		list.insertAfter(node1, node2);
-		logger.debug("List before popping last:\n");
-		list.printList();
-		logger.debug("\nPopped element: " + list.popLast().getKey());
-		logger.debug("\nList after popping last:\n");
 		list.printList();
 	}
+
 }
 
 interface INode<K> {
