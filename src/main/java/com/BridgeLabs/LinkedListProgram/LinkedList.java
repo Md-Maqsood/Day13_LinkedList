@@ -121,26 +121,29 @@ public class LinkedList<K> {
 			this.size++;
 		}
 	}
-	
+
 	public void remove(K value) {
-		INode<K> node= this.head;
-		if(node==this.tail && node!=null) {
-			if(node.getKey().equals(value)) {
-				this.head=null;
-				this.tail=null;
+		INode<K> node = this.head;
+		if (node == this.tail && node != null) {
+			if (node.getKey().equals(value)) {
+				this.head = null;
+				this.tail = null;
+				size--;
 			}
-		}else if(node!=null) {
-			while(node!=this.tail && !(node.getNext().getKey().equals(value))){
-				node=node.getNext();
+		} else if (node != null) {
+			while (node != this.tail && !(node.getNext().getKey().equals(value))) {
+				node = node.getNext();
 			}
-			INode<K> nodeRemoved=node.getNext();
-			node.setNext(nodeRemoved.getNext());
-			nodeRemoved.setNext(null);
-			if(nodeRemoved==this.tail) {
-				this.tail=node;
+			if (node != this.tail) {
+				INode<K> nodeRemoved = node.getNext();
+				node.setNext(nodeRemoved.getNext());
+				nodeRemoved.setNext(null);
+				if (nodeRemoved == this.tail) {
+					this.tail = node;
+				}
+				size--;
 			}
-			size--;
-		}		
+		}
 	}
 
 	public static void main(String[] args) {

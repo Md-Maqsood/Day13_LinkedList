@@ -89,5 +89,27 @@ public class LinkedListTest {
 		boolean result = (list.search(40)==false) || sizeAfterDeletion==sizeBeforeDeletion-1;
 		Assert.assertTrue(result);
 	}
+	
+	@Test
+	public void onDeletingGivenValueNotInList_ListSizeShouldRemainSame() {
+		LinkedList<Integer> list = new LinkedList<Integer>();
+		MyNode<Integer> node1 = new MyNode<Integer>(56);
+		MyNode<Integer> node2 = new MyNode<Integer>(30);
+		MyNode<Integer> node3 = new MyNode<Integer>(70);
+		list.append(node1);
+		list.append(node2);
+		list.append(node3);
+		MyNode<Integer> node4 = new MyNode<Integer>(40);
+		list.insertAfter(30, node4);
+		logger.debug("Before deletion: ");
+		list.printList();
+		int sizeBeforeDeletion=list.size();
+		list.remove(50);
+		int sizeAfterDeletion=list.size();
+		logger.debug("After deletion: ");
+		list.printList();
+		boolean result = sizeAfterDeletion==sizeBeforeDeletion;
+		Assert.assertTrue(result);
+	}
 
 }
