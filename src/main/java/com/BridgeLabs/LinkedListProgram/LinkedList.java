@@ -92,7 +92,7 @@ public class LinkedList<K> {
 		logger.debug(" Size: " + size + "\n");
 	}
 
-	public boolean search(int searchValue) {
+	public boolean search(K searchValue) {
 		INode<K> node = this.head;
 		while (node != null) {
 			if (node.getKey().equals(searchValue)) {
@@ -103,7 +103,7 @@ public class LinkedList<K> {
 		return false;
 	}
 
-	public void insertAfter(int value, INode<K> newNode) {
+	public void insertAfter(K value, INode<K> newNode) {
 		INode<K> node = this.head;
 		while (node != null) {
 			if (node.getKey().equals(value)) {
