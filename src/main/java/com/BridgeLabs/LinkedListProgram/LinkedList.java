@@ -46,17 +46,17 @@ public class LinkedList<K> {
 		}
 		this.size++;
 	}
-	
+
 	public void insertAfter(INode<K> node, INode<K> newNode) {
-		INode<K> temp=node.getNext();
+		INode<K> temp = node.getNext();
 		node.setNext(newNode);
 		node.getNext().setNext(temp);
 		this.size++;
 	}
-	
-	public INode<K> pop(){
-		INode<K> temp=this.head;
-		this.head=this.head.getNext();
+
+	public INode<K> pop() {
+		INode<K> temp = this.head;
+		this.head = this.head.getNext();
 		size--;
 		return temp;
 	}
@@ -82,7 +82,7 @@ public class LinkedList<K> {
 		list.insertAfter(node1, node2);
 		logger.debug("List before popping:\n");
 		list.printList();
-		logger.debug("\nPopped element: "+list.pop().getKey());
+		logger.debug("\nPopped element: " + list.pop().getKey());
 		logger.debug("\nList after popping:\n");
 		list.printList();
 	}
