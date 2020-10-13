@@ -91,6 +91,22 @@ public class LinkedListTest {
 	}
 	
 	@Test
+	public void onDeletingFromListWithSingleElementGivenValue_WhenSearched_ShouldReturnFalse_AndListSizeReducedByOneWith() {
+		LinkedList<Integer> list = new LinkedList<Integer>();
+		MyNode<Integer> node1 = new MyNode<Integer>(56);
+		list.append(node1);
+		logger.debug("Before deletion: ");
+		list.printList();
+		int sizeBeforeDeletion=list.size();
+		list.remove(56);
+		int sizeAfterDeletion=list.size();
+		logger.debug("After deletion: ");
+		list.printList();
+		boolean result = (list.search(56)==false) || sizeAfterDeletion==sizeBeforeDeletion-1;
+		Assert.assertTrue(result);
+	}
+	
+	@Test
 	public void onDeletingGivenValueNotInList_ListSizeShouldRemainSame() {
 		LinkedList<Integer> list = new LinkedList<Integer>();
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
