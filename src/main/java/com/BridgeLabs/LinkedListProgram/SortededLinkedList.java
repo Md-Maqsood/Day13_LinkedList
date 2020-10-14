@@ -40,6 +40,7 @@ public class SortededLinkedList<K extends Comparable<K>> {
 			INode<K> temp = this.head;
 			this.head = newNode;
 			this.head.setNext(temp);
+			size++;
 		}else {
 			INode<K> node = this.head;
 			while(node!=this.tail && newNode.getKey().compareTo(node.getNext().getKey())>0) {
