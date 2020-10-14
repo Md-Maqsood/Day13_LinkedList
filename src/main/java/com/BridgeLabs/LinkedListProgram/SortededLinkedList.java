@@ -19,6 +19,10 @@ public class SortededLinkedList<K extends Comparable<K>> {
 	public int size() {
 		return size;
 	}
+	
+	public boolean isEmpty() {
+		return size==0;
+	}
 
 	public void add(INode<K> newNode) {
 		if (this.head == null) {
