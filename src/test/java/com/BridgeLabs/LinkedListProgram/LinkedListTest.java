@@ -9,7 +9,7 @@ public class LinkedListTest {
 	private static final Logger logger = LogManager.getLogger(LinkedListTest.class);
 
 	@Test
-	public void givenSearchValue_WhenInList_ShouldReturnTrue() {
+	public void givenSearchValueWhenInListShouldReturnTrue() {
 		SortededLinkedList<Integer> list = new SortededLinkedList<Integer>();
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
 		MyNode<Integer> node2 = new MyNode<Integer>(30);
@@ -23,7 +23,7 @@ public class LinkedListTest {
 	}
 
 	@Test
-	public void givenSearchValue_WhenNotInList_ShouldReturnFalse() {
+	public void givenSearchValueWhenNotInListShouldReturnFalse() {
 		SortededLinkedList<Integer> list = new SortededLinkedList<Integer>();
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
 		MyNode<Integer> node2 = new MyNode<Integer>(30);
@@ -38,7 +38,7 @@ public class LinkedListTest {
 
 
 	@Test
-	public void onDeletingGivenValue_WhenSearched_ShouldReturnFalse_AndListSizeReducedByOne() {
+	public void onDeletingGivenValueWhenSearchedShouldReturnFalse_AndListSizeReducedByOne() {
 		SortededLinkedList<Integer> list = new SortededLinkedList<Integer>();
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
 		MyNode<Integer> node2 = new MyNode<Integer>(30);
@@ -60,7 +60,7 @@ public class LinkedListTest {
 	}
 	
 	@Test
-	public void onDeletingFromListWithSingleElementGivenValue_WhenSearched_ShouldReturnFalse_AndListSizeReducedByOneWith() {
+	public void onDeletingFromListWithSingleElementGivenValueWhenSearchedShouldReturnFalseAndListSizeReducedByOneWith() {
 		SortededLinkedList<Integer> list = new SortededLinkedList<Integer>();
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
 		list.add(node1);
@@ -76,7 +76,7 @@ public class LinkedListTest {
 	}
 	
 	@Test
-	public void onDeletingGivenValueNotInList_ListSizeShouldRemainSame() {
+	public void onDeletingGivenValueNotInListListSizeShouldRemainSame() {
 		SortededLinkedList<Integer> list = new SortededLinkedList<Integer>();
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
 		MyNode<Integer> node2 = new MyNode<Integer>(30);
@@ -99,7 +99,7 @@ public class LinkedListTest {
 	}
 	
 	@Test
-	public void onAddingUnorderedValues_WhenMatched_ShouldMatchSortedOrder() {
+	public void onAddingUnorderedValuesWhenMatchedShouldMatchSortedOrder() {
 		SortededLinkedList<Integer> list = new SortededLinkedList<Integer>();
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
 		MyNode<Integer> node2 = new MyNode<Integer>(30);
