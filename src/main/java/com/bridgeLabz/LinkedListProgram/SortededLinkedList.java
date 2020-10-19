@@ -1,4 +1,4 @@
-package com.BridgeLabs.LinkedListProgram;
+package com.bridgeLabz.LinkedListProgram;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

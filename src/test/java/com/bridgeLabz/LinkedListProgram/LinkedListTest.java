@@ -1,9 +1,12 @@
-package com.BridgeLabs.LinkedListProgram;
+package com.bridgeLabz.LinkedListProgram;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.bridgeLabz.LinkedListProgram.MyNode;
+import com.bridgeLabz.LinkedListProgram.SortededLinkedList;
 
 public class LinkedListTest {
 	private static final Logger logger = LogManager.getLogger(LinkedListTest.class);
